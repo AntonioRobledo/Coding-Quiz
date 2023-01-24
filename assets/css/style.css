@@ -1,0 +1,52 @@
+h1 {
+    float: right;
+}
+
+h2 {
+    float: left;
+}
+
+h2:hover {
+    color: purple;
+    cursor: pointer;
+}
+
+#Front_Page {
+    display: inline-block;
+    margin: auto;
+    width: 100%;   
+}
+
+h3 {
+    text-align: center;
+    font-size: 45px;
+}
+
+#instructions {
+    display: inline-block;
+    width: 50%;
+}
+
+p {
+    font-size: 20px;
+}
+
+button {
+    padding: 0;
+    background-color: purple;
+    color: white;
+}
+
+.button {
+    display: inline-block;
+    width: 10%;
+}
+
+.button:active {
+    color: blue;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
