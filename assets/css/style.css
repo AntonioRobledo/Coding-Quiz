@@ -1,3 +1,4 @@
+
 h1 {
     float: right;
 }
@@ -11,7 +12,7 @@ h2:hover {
     cursor: pointer;
 }
 
-#Front_Page {
+#Start_Page {
     display: inline-block;
     margin: auto;
     width: 100%;   
@@ -31,22 +32,62 @@ p {
     font-size: 20px;
 }
 
-button {
+.startBtn {
+    display: inline-block;
+    width: 15%;
     padding: 0;
     background-color: purple;
     color: white;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
-.button {
-    display: inline-block;
-    width: 10%;
-}
-
-.button:active {
-    color: blue;
-}
-
-.button:hover {
+.startBtn:hover {
     cursor: pointer;
+    color: orange;
+} 
+
+.startBtn:active {
+    transform: scale(0.9,0.9);
 }
 
+#question-container {
+    display: inline-block;
+    margin: auto;
+    width: 100%
+}
+
+#questions {
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#choice-buttons {
+    display: inline-block;
+    width: 120%;
+    margin-left: 20%;
+    display: grid;
+    gap: 10px;
+}
+
+.btn {
+    width: 50%;
+    background-color: purple;
+    color: white;
+    border-radius: 10px;
+    font-size: 30px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    color: orange;
+}
+
+.btn:active {
+    transform: scale(1,0.9);
+}
+
+.hide {
+    display: none;
+}
