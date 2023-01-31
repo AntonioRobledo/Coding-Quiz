@@ -1,9 +1,14 @@
 // Define variables
-var startButton = document.querySelector("startBtn");
+var startButton = document.querySelector(".startBtn");
 
+var timer = document.querySelector("h1");
 
-// function that allows user to start the quiz and timer countdown
-   
+var btn = document.getElementById("choice-buttons")
+
+var choice1 = document.getElementById('Choice1');
+var choice2 = document.getElementById('Choice2');
+var choice3 = document.getElementById('Choice3');
+var choice4 = document.getElementById('Choice4');
 
 // Prompts and answers
 var questions = [
@@ -20,7 +25,7 @@ var questions = [
     },
 
     { 
-        prompt: "Which symbol is used for comments in in the index.html file?",
+        prompt: "Which symbol is used for comments in the index.html file?",
         options: {
             1: '//',
             2: '<!--',
@@ -51,72 +56,103 @@ var questions = [
         },
         answer: '.'
     },
-]
+];
 
 var score = 0;
+var index = 0;
 
-for(var i=0; i < questions.length; i++) {
-    var choice = questions[i];
-    if (choice == questions[i].answer) {
-        score++;
-    } else {
-        secondsLeft - 10;
-       // displayWrong();
-    }
+
+// function that displays the current question 
+
+var questionDiv = document.querySelector('#questions')
+
+function displayQuestion() {
+    choice1.textContent = questions[index].prompt[0];
+    return;
 }
 
+// function that displays the option for the current question 
 
-// create choice variables
-var choice1 = document.getElementById('choice1');
-var choice2 = document.getElementById('choice2');
-var choice3 = document.getElementById('choice3');
-var choice4 = document.getElementById('choice4');
+function displayChoices() {
 
-console.log(questions[0].prompt);
-console.log(questions[0].answer);
+    choice1.textContent = questions[index].options[1];
+    choice2.textContent = questions[index].options[2];
+    choice3.textContent = questions[index].options[3];
+    choice4.textContent = questions[index].options[4];
+      
+};
 
-console.log(questions[1].prompt);
-console.log(questions[1].answer);
+// time penalty for incorrect answer
+btn.addEventListener('click', function(event) {
+    if (event.target.innerText != questions[index].answer)
+    (secondsLeft-=10);
+})
 
-console.log(questions[2].prompt);
-console.log(questions[2].answer);
+btn.addEventListener('click', function(event) {
+   if (event.target.innerText == questions[index].answer)
+   index++;
+   score++;
+   nextQuestion();
+   displayChoices(); 
+})
+console.log(score);
 
 
-console.log(questions[3].prompt);
-console.log(questions[3].answer);
+//once the user picks an answer
+//if we are not at the end of the array(hint: compare questions arr length 
+//to index), then index++
+// displayQuestion()
+// }
 
-
-// Section for Timer Countdown
-// Select elements by class
-var start = document.querySelector("startBtn");
-
-
-// Select elements by their id
-var mainEl = document.getElementById("main");
+var container = document.querySelector('.container');
+var timerMessage = document.querySelector('.timerMessage');
+var questionContainer = document.querySelector('#question-container');
+var startPage = document.querySelector('#Start_Page');
 
 // Set timer count
-var secondsLeft = 61;
+var secondsLeft = 60;
 
-// Set event listener for start timer and decrement
+// create function that runs timer 
 
 function setTime() {
     var timerInterval = setInterval(function() {
         secondsLeft--; 
         timer.textContent = "Time remaining: " + secondsLeft + " s";
 
-        if(secondsLeft === 0) {
+        if(secondsLeft <= 0) {
             clearInterval(timerInterval);
             displayMessage();
         }
     }, 1000);
 }
 
-// Set display message if player runs out of time 
-function displayMessage() {
-    timer.textContent = "TIME'S UP! GAME OVER.";
-    var gameOver = document.createElement("div");
-    gameOver.setAttribute("class", "plain");
-    mainEl.appendChild(gameOver);
+// create a function that will hide the title page 
+// and display the first question
+
+function titlePage() {
+    startPage.classList.add('hide');
+    startPage.textContent = nextQuestion();
+    return;
 }
 
-setTime();
+// Set display message if player runs out of time 
+function displayMessage() {
+    container.classList.add('hide')
+    timerMessage.textContent = "TIME'S UP! GAME OVER.";
+    return;
+}
+
+function nextQuestion() {
+    questionContainer.classList.add('hide')
+    questionDiv.textContent = questions[index].prompt;
+    return;
+}
+
+// set event listener for timer 
+startButton.addEventListener("click", function() {
+    setTime(); 
+    displayChoices();
+    titlePage();
+    nextQuestion();
+})
+
