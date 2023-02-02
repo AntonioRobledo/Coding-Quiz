@@ -18,3 +18,4 @@ Here is a capture of the page that is displayed if the user runs out of time.
 
 ## Deployment Link
 
+https://antoniorobledo.github.io/Coding-Quiz/
