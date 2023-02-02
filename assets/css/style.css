@@ -26,7 +26,7 @@ h2:hover {
     display: inline-block;
     text-align: center;
     margin-top: 50px;
-    padding: 15px;
+    padding: 15px; 
     width: 100%;   
 }
 
@@ -104,6 +104,3 @@ p {
     transform: scale(1,0.9);
 }
 
-.hide {
-    display: none;
-}

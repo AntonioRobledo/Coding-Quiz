@@ -10,6 +10,13 @@ var choice2 = document.getElementById('Choice2');
 var choice3 = document.getElementById('Choice3');
 var choice4 = document.getElementById('Choice4');
 
+var container = document.querySelector('.container');
+var timerMessage = document.querySelector('.timerMessage');
+var questionContainer = document.querySelector('#question-container');
+var startPage = document.querySelector('#Start_Page');
+var questionDiv = document.querySelector('#questions');
+
+
 // Prompts and answers
 var questions = [
 
@@ -59,17 +66,7 @@ var questions = [
 ];
 
 var score = 0;
-var index = 0;
-
-
-// function that displays the current question 
-
-var questionDiv = document.querySelector('#questions')
-
-function displayQuestion() {
-    choice1.textContent = questions[index].prompt[0];
-    return;
-}
+var index = 0; 
 
 // function that displays the option for the current question 
 
@@ -82,33 +79,38 @@ function displayChoices() {
       
 };
 
-// time penalty for incorrect answer
-btn.addEventListener('click', function(event) {
-    if (event.target.innerText != questions[index].answer)
-    (secondsLeft-=10);
-})
+var displayWrong = document.createElement('div');
+displayWrong.innerText = 'Wrong!';
+
+var displayCorrect = document.createElement('div');
+displayCorrect.innerText = 'Correct!';
+
 
 btn.addEventListener('click', function(event) {
-   if (event.target.innerText == questions[index].answer)
-   index++;
-   score++;
-   nextQuestion();
-   displayChoices(); 
-})
-console.log(score);
-
+   if (event.target.innerText == questions[index].answer 
+    || questions[index].length < questions.length) {
+    index++;
+    score++;
+    nextQuestion();
+    displayChoices();
+    displayCorrect.innerText;
+   } else if (event.target.innerText != questions[index].answer) {
+    index++;
+    secondsLeft-=10;
+    nextQuestion();
+    displayChoices(); 
+   } else if (index === questions.length - 1)
+   return;
+    console.log(score);
+  }
+);
 
 //once the user picks an answer
-//if we are not at the end of the array(hint: compare questions arr length 
+//if we are not at the end of the array(hint: compare questions array length 
 //to index), then index++
 // displayQuestion()
 // }
-
-var container = document.querySelector('.container');
-var timerMessage = document.querySelector('.timerMessage');
-var questionContainer = document.querySelector('#question-container');
-var startPage = document.querySelector('#Start_Page');
-
+ 
 // Set timer count
 var secondsLeft = 60;
 
@@ -147,6 +149,7 @@ function nextQuestion() {
     questionDiv.textContent = questions[index].prompt;
     return;
 }
+        
 
 // set event listener for timer 
 startButton.addEventListener("click", function() {
@@ -155,4 +158,16 @@ startButton.addEventListener("click", function() {
     titlePage();
     nextQuestion();
 })
+ 
+// high score page 
+var highScores = document.querySelector('#highscore-container');
+var scores = document.querySelector('#results');
+
+function highScore() {
+    highScores.classList.add('hide')
+    return;
+};
+
+// stores the users score
+localStorage.setItem('quizScore', score);
 
